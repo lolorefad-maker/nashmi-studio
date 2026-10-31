@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nashmi Studio — تصاميم إعلانية وتحليل أعمال بالذكاء الاصطناعي</title>
+  <meta name="description" content="منصة للشركات والصفحات التجارية: صمّم إعلانات وبوسترات احترافية بالذكاء الاصطناعي، وحلّل أداء نشاطك من لوحة تحكم واحدة.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23d9a85f'/><text x='32' y='43' font-size='30' text-anchor='middle' font-family='Arial' font-weight='700' fill='%231d1408'>N</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/glass.css">
+  <script src="/vendor/lucide.js" defer></script>
+  <style>
+    .wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+    .nav { display: flex; align-items: center; gap: 16px; padding: 18px 0; }
+    .nav .links { display: flex; gap: 4px; padding: 5px; border-radius: 999px; margin-inline-start: auto; }
+    .nav .links a { padding: 8px 16px; border-radius: 999px; color: var(--ink-2); font-size: 14px; }
+    .nav .links a:hover { background: rgba(255,255,255,.1); color: #fff; }
+    .hero { text-align: center; padding: clamp(50px, 9vw, 110px) 0 40px; }
+    .hero h1 { font-size: clamp(36px, 6vw, 72px); line-height: 1.15; margin: 22px auto 18px; max-width: 900px; letter-spacing: -1px; font-weight: 700; }
+    .hero h1 em { font-style: normal; background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p { color: var(--ink-2); font-size: clamp(16px, 2vw, 19px); max-width: 640px; margin: 0 auto 30px; }
+    .hero .btn { height: 52px; padding: 0 26px; font-size: 16px; }
+    .preview { margin: 60px auto 0; max-width: 1060px; padding: 16px; border-radius: 32px; text-align: right; }
+    .preview-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .preview .card { padding: 16px; }
+    .pv-chart { grid-column: span 3; height: 210px; position: relative; overflow: hidden; }
+    .pv-chart svg { position: absolute; inset: auto 0 0 0; width: 100%; height: 150px; }
+    .pv-poster { grid-row: span 2; border-radius: 20px; padding: 18px; background: linear-gradient(160deg, #0d0d0f, #2a2419); display: flex; flex-direction: column; justify-content: space-between; min-height: 300px; border: 1px solid rgba(255,255,255,.12); }
+    .pv-poster b { font-size: 30px; color: #f6efe2; line-height: 1.2; }
+    .pv-poster .pill { align-self: flex-start; background: #c9a46a; color: #111; border-radius: 99px; padding: 6px 14px; font-weight: 700; font-size: 13px; }
+    .section { padding: 90px 0 0; }
+    .section h2 { font-size: clamp(26px, 3.5vw, 40px); margin: 0 0 10px; text-align: center; }
+    .section > .wrap > p.lead { text-align: center; color: var(--ink-2); margin: 0 auto 40px; max-width: 600px; }
+    .feat h3 { margin: 16px 0 6px; font-size: 18px; }
+    .feat p { margin: 0; color: var(--ink-2); font-size: 14.5px; line-height: 1.8; }
+    .step-n { font-size: 46px; font-weight: 700; background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
+    .price { font-size: 42px; font-weight: 700; margin: 10px 0; }
+    .price small { font-size: 14px; color: var(--ink-3); font-weight: 400; }
+    .plan ul { list-style: none; padding: 0; margin: 18px 0 24px; display: grid; gap: 10px; color: var(--ink-2); font-size: 14.5px; }
+    .plan li { display: flex; gap: 8px; align-items: center; }
+    .plan li svg { width: 16px; color: var(--gold); flex: none; }
+    footer { padding: 70px 0 40px; text-align: center; color: var(--ink-3); font-size: 13.5px; }
+    @media (max-width: 860px) {
+      .nav .links { display: none; }
+      .preview-inner { grid-template-columns: 1fr 1fr; }
+      .pv-chart { grid-column: 1 / -1; }
+      .pv-poster { grid-row: auto; grid-column: 1 / -1; min-height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wallpaper"></div>
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand glass" href="/"><span class="brand-mark">N</span><span>Nashmi Studio<small>استوديو الأعمال الذكي</small></span></a>
+      <div class="links glass"><a href="#features">المزايا</a><a href="#how">كيف يعمل</a><a href="#pricing">الأسعار</a></div>
+      <button class="btn sm" id="lang-toggle" data-no-i18n><i data-lucide="languages"></i><span></span></button>
+      <a class="btn" href="/login">دخول</a>
+      <a class="btn primary" href="/login#register">ابدأ مجاناً</a>
+    </nav>
+
+    <header class="hero">
+      <span class="badge gold"><i data-lucide="sparkles"></i>مدعوم بالذكاء الاصطناعي</span>
+      <h1>صمّم إعلانات <em>تبيع</em><br>وافهم نشاطك بالأرقام</h1>
+      <p>منصة واحدة لكل صاحب بزنس: بوسترات وإعلانات جاهزة للنشر بهوية علامتك خلال ثوانٍ، ولوحة تحليلات تخبرك أين تنمو وماذا تفعل بعد ذلك.</p>
+      <div class="row wrap" style="justify-content:center">
+        <a class="btn gold" href="/login#register"><i data-lucide="wand-sparkles"></i>جرّب مجاناً — 30 نقطة</a>
+        <a class="btn" href="#how">شاهد كيف يعمل</a>
+      </div>
+
+      <div class="preview glass">
+        <div class="preview-inner">
+          <div class="card tint-blue"><p class="muted small" style="margin:0">الإيرادات</p><b class="num" style="font-size:24px">14,031</b><p class="small" style="margin:4px 0 0;color:var(--good-ink)">▲ 4.8%</p></div>
+          <div class="card tint-gold"><p class="muted small" style="margin:0">صافي الربح</p><b class="num" style="font-size:24px">5,442</b><p class="small muted" style="margin:4px 0 0">هامش 38.8%</p></div>
+          <div class="card tint-violet"><p class="muted small" style="margin:0">عملاء جدد</p><b class="num" style="font-size:24px">157</b><p class="small" style="margin:4px 0 0;color:var(--good-ink)">▲ 3.3%</p></div>
+          <div class="pv-poster"><span class="pill">خصم 30%</span><b>عرض نهاية<br>الأسبوع</b><span class="small" style="color:#b3a993">@rayhan.cafe</span></div>
+          <div class="card dark pv-chart"><p class="small" style="margin:0">الإيرادات مقابل المصاريف</p>
+            <svg viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true">
+              <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3987e5" stop-opacity=".35"/><stop offset="1" stop-color="#3987e5" stop-opacity="0"/></linearGradient></defs>
+              <path d="M0 110 C60 100 90 90 150 92 S250 70 300 66 S420 50 480 40 S560 28 600 22 L600 150 L0 150Z" fill="url(#g1)"/>
+              <path d="M0 110 C60 100 90 90 150 92 S250 70 300 66 S420 50 480 40 S560 28 600 22" fill="none" stroke="#3987e5" stroke-width="2.5"/>
+              <path d="M0 128 C70 124 110 118 160 118 S260 108 310 104 S430 96 490 90 S570 84 600 82" fill="none" stroke="#d95926" stroke-width="2.5"/>
+            </svg></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="features"><div class="wrap">
+      <h2>كل ما يحتاجه نشاطك للنمو</h2>
+      <p class="lead">بدون مصمم، بدون محلل بيانات، وبدون خبرة تقنية</p>
+      <div class="grid g-3">
+        <div class="card feat hover"><span class="icon-chip"><i data-lucide="wand-sparkles"></i></span><h3>مصمم إعلانات ذكي</h3><p>اكتب فكرتك بكلماتك، واحصل على بوستر أو إعلان احترافي بألوان وخط وشعار علامتك، قابل للتعديل بالكامل.</p></div>
+        <div class="card feat hover"><span class="icon-chip"><i data-lucide="layout-template"></i></span><h3>كل المقاسات</h3><p>منشور انستغرام، ستوري، إعلان فيسبوك، غلاف، وبوستر طباعة A4 — بدّل بينها بنقرة.</p></div>
+        <div class="card feat hover"><span class="icon-chip"><i data-lucide="chart-no-axes-combined"></i></span><h3>لوحة تحليلات فخمة</h3><p>إيرادات، أرباح، تكلفة اكتساب العميل، العائد على الإعلانات، ونمو المتابعين في لوحة واحدة.</p></div>
+        <div class="card feat hover"><span class="icon-chip"><i data-lucide="brain-circuit"></i></span><h3>مستشار أعمال AI</h3><p>تحليل SWOT كامل، توصيات مرتبة حسب الأولوية، وخطة تسويق عملية لمدة 30 يوماً.</p></div>
+        <div class="card feat hover"><span class="icon-chip"><i data-lucide="pen-line"></i></span><h3>كاتب المحتوى</h3><p>نصوص منشورات وهاشتاغات وإعلانات ممولة بلهجة جمهورك ولكل منصة أسلوبها.</p></div>
+        <div class="card feat hover"><span class="icon-chip"><i data-lucide="swatch-book"></i></span><h3>هوية علامتك</h3><p>احفظ شعارك وألوانك وخطك مرة واحدة، وكل تصميم يخرج متناسقاً مع علامتك.</p></div>
+      </div>
+    </div></section>
+
+    <section class="section" id="how"><div class="wrap">
+      <h2>ثلاث خطوات فقط</h2>
+      <p class="lead">من الفكرة إلى إعلان منشور في أقل من دقيقة</p>
+      <div class="grid g-3">
+        <div class="card"><div class="step-n">01</div><h3>أنشئ حسابك</h3><p class="muted">أضف اسم نشاطك، شعارك وألوانك.</p></div>
+        <div class="card"><div class="step-n">02</div><h3>اكتب فكرتك</h3><p class="muted">"خصم 30% على القهوة نهاية الأسبوع" — وسيتولى الذكاء الاصطناعي الباقي.</p></div>
+        <div class="card"><div class="step-n">03</div><h3>عدّل وانشر</h3><p class="muted">غيّر أي نص أو لون، نزّل التصميم بجودة عالية وانشره مباشرة.</p></div>
+      </div>
+    </div></section>
+
+    <section class="section" id="pricing"><div class="wrap">
+      <h2>أسعار بسيطة وواضحة</h2>
+      <p class="lead">ابدأ مجاناً وارتقِ عندما ينمو نشاطك</p>
+      <div class="grid g-3">
+        <div class="card plan"><b style="font-size:18px">مجاني</b><div class="price num">$0<small> / شهرياً</small></div>
+          <ul><li><i data-lucide="check"></i>30 نقطة شهرياً</li><li><i data-lucide="check"></i>4 صور بالذكاء الاصطناعي</li><li><i data-lucide="check"></i>كل مقاسات التصميم</li><li><i data-lucide="check"></i>تحليلات أساسية</li></ul>
+          <a class="btn" style="width:100%" href="/login#register">ابدأ مجاناً</a></div>
+        <div class="card plan tint-gold"><div class="row"><b style="font-size:18px" class="spacer">احترافي</b><span class="badge gold">الأكثر طلباً</span></div><div class="price num">$19<small> / شهرياً</small></div>
+          <ul><li><i data-lucide="check"></i>300 نقطة شهرياً</li><li><i data-lucide="check"></i>تحليل ذكي + خطة 30 يوماً</li><li><i data-lucide="check"></i>كاتب المحتوى</li><li><i data-lucide="check"></i>تصدير Excel</li></ul>
+          <a class="btn gold" style="width:100%" href="/login#register">ابدأ الآن</a></div>
+        <div class="card plan"><b style="font-size:18px">أعمال</b><div class="price num">$49<small> / شهرياً</small></div>
+          <ul><li><i data-lucide="check"></i>1500 نقطة شهرياً</li><li><i data-lucide="check"></i>كل مزايا الاحترافي</li><li><i data-lucide="check"></i>دعم بأولوية</li><li><i data-lucide="check"></i>مناسب للوكالات</li></ul>
+          <a class="btn" style="width:100%" href="/login#register">تواصل معنا</a></div>
+      </div>
+    </div></section>
+
+    <footer>© <span class="num" id="y"></span> Nashmi Studio — صُنع لأصحاب الأعمال في العالم العربي</footer>
+  </div>
+  <script type="module">
+    import { applyWallpaper } from '/js/core.js';
+    import { startI18n, setLang, isEn } from '/js/i18n.js';
+    startI18n();
+    applyWallpaper();
+    const lt = document.getElementById('lang-toggle');
+    lt.querySelector('span').textContent = isEn ? 'العربية' : 'English';
+    lt.onclick = () => setLang(isEn ? 'ar' : 'en');
+    document.getElementById('y').textContent = new Date().getFullYear();
+    addEventListener('DOMContentLoaded', () => window.lucide?.createIcons());
+  </script>
+</body>
+</html>

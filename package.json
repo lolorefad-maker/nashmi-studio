@@ -1,0 +1,28 @@
+{
+  "name": "nashmi-studio",
+  "version": "1.0.0",
+  "description": "AI design + business analytics SaaS",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning server/index.js",
+    "dev": "node --watch --env-file-if-exists=.env --disable-warning=ExperimentalWarning server/index.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "chart.js": "^4.6.1",
+    "cookie-parser": "^1.4.7",
+    "dompurify": "^3.4.17",
+    "exceljs": "^4.4.0",
+    "express": "^5.3.0",
+    "fabric": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "lucide": "^1.65.0",
+    "marked": "^15.0.12",
+    "nodemailer": "^10.3.1"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.13"
+  }
+}

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>التقرير الشهري</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="/vendor/chart.js" defer></script>
+  <script src="/vendor/lucide.js" defer></script>
+  <style>
+    :root { --ink: #1d1712; --ink-2: #5c5248; --ink-3: #8a7f74; --line: #e8e1d6; --paper: #ffffff; --bg: #efe9df; --accent: #c9a46a; --accent-ink: #7a5a26; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .toolbar { position: sticky; top: 0; z-index: 5; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; padding: 12px 16px; background: rgba(29, 23, 18, .92); backdrop-filter: blur(10px); }
+    .toolbar button, .toolbar a { display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08); color: #fff; font: inherit; font-size: 14px; cursor: pointer; text-decoration: none; }
+    .toolbar .primary { background: linear-gradient(135deg, #f7e9cc, #e3c38f); color: #1d1408; border: 0; font-weight: 600; }
+    .toolbar svg { width: 16px; height: 16px; }
+    .page { width: 210mm; min-height: 297mm; margin: 24px auto; background: var(--paper); padding: 16mm 15mm; box-shadow: 0 20px 60px -20px rgba(0,0,0,.35); }
+    header.r { display: flex; align-items: center; gap: 16px; padding-bottom: 18px; border-bottom: 3px solid var(--accent); }
+    .logo { width: 64px; height: 64px; border-radius: 16px; background: var(--accent); display: grid; place-items: center; overflow: hidden; color: #fff; font-weight: 700; font-size: 26px; flex: none; }
+    .logo img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+    header h1 { margin: 0; font-size: 24px; }
+    header p { margin: 2px 0 0; color: var(--ink-2); font-size: 14px; }
+    .stamp { margin-inline-start: auto; text-align: end; font-size: 12px; color: var(--ink-3); }
+    h2 { font-size: 16px; margin: 26px 0 12px; display: flex; align-items: center; gap: 8px; }
+    h2::before { content: ''; width: 6px; height: 18px; border-radius: 3px; background: var(--accent); }
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .kpi { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+    .kpi .l { font-size: 12px; color: var(--ink-3); }
+    .kpi .v { font-size: 21px; font-weight: 700; margin-top: 4px; direction: ltr; text-align: end; font-variant-numeric: tabular-nums; }
+    .kpi .d { font-size: 11.5px; color: var(--ink-2); margin-top: 2px; }
+    .up { color: #0b7a0b; } .down { color: #b42318; }
+    .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .chart { border: 1px solid var(--line); border-radius: 14px; padding: 12px; height: 230px; position: relative; }
+    .chart b { font-size: 13px; }
+    .chart .box { position: absolute; inset: 56px 12px 12px; }
+    .legend { font-size: 11.5px; color: var(--ink-2); display: flex; gap: 12px; margin-top: 2px; }
+    .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-inline-end: 5px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    th { text-align: start; color: var(--ink-3); font-weight: 500; padding: 8px 6px; border-bottom: 1.5px solid var(--line); }
+    td { padding: 8px 6px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+    .summary { background: #faf6ef; border: 1px solid #efe3cf; border-radius: 14px; padding: 14px 16px; line-height: 1.9; font-size: 14px; }
+    .swot { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .swot div { border-radius: 14px; padding: 12px 14px; font-size: 13px; }
+    .swot h3 { margin: 0 0 6px; font-size: 13.5px; }
+    .swot ul, .plan ul { margin: 0; padding-inline-start: 18px; line-height: 1.8; color: var(--ink-2); }
+    .s1 { background: #ecf8ef; } .s2 { background: #fdeeee; } .s3 { background: #edf3fd; } .s4 { background: #f3effd; }
+    .rec { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+    .rec .n { width: 26px; height: 26px; border-radius: 8px; background: #f4ead8; color: var(--accent-ink); display: grid; place-items: center; font-weight: 700; flex: none; }
+    .rec b { display: block; margin-bottom: 2px; }
+    .rec p { margin: 0; color: var(--ink-2); }
+    .plan { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; font-size: 12.5px; }
+    .plan div { border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+    .plan small { color: var(--accent-ink); font-weight: 600; }
+    footer.r { margin-top: 28px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--ink-3); display: flex; justify-content: space-between; }
+    .empty { text-align: center; padding: 60px 20px; color: var(--ink-2); }
+    .avoid { break-inside: avoid; }
+    @page { size: A4; margin: 0; }
+    @media print {
+      body { background: #fff; }
+      .toolbar { display: none; }
+      .page { margin: 0; box-shadow: none; width: auto; min-height: auto; }
+    }
+    @media (max-width: 860px) {
+      .page { width: auto; margin: 0; padding: 20px 16px; }
+      .kpis { grid-template-columns: repeat(2, 1fr); }
+      .charts, .swot, .plan { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="primary" id="print"><i data-lucide="printer"></i>طباعة / حفظ PDF</button>
+    <a id="wa" target="_blank" rel="noopener"><i data-lucide="message-circle"></i>مشاركة عبر واتساب</a>
+    <button id="mail"><i data-lucide="mail"></i>إرسال بالبريد</button>
+    <a href="/app#/analytics"><i data-lucide="arrow-right"></i>العودة للوحة</a>
+  </div>
+  <main class="page" id="page"><div class="empty">جاري تحضير التقرير...</div></main>
+
+  <script type="module">
+    import { startI18n, LOCALE, isEn, t } from '/js/i18n.js';
+    startI18n();
+    const page = document.getElementById('page');
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const num = (n, d = 0) => (n == null ? '—' : Number(n).toLocaleString('en-US', { maximumFractionDigits: d }));
+    const month = (p, style = 'long') => { const [y, m] = p.split('-').map(Number); return new Date(y, m - 1, 1).toLocaleDateString(LOCALE, style === 'long' ? { month: 'long', year: 'numeric' } : { month: 'short' }); };
+    const delta = (v) => (v == null ? '' : `<span class="${v >= 0 ? 'up' : 'down'}">${v >= 0 ? '▲' : '▼'} ${Math.abs(v)}%</span> ${isEn ? 'vs. last month' : 'عن الشهر السابق'}`);
+
+    const res = await fetch('/api/report/data', { credentials: 'same-origin' });
+    if (res.status === 401) location.href = '/login';
+    const data = await res.json();
+    const { business: b, kpis: k, metrics, analysis: a, stats, summary } = data;
+    const cur = isEn ? b.currency : { JOD: 'د.أ', SAR: 'ر.س', AED: 'د.إ', KWD: 'د.ك', QAR: 'ر.ق', BHD: 'د.ب', OMR: 'ر.ع', EGP: 'ج.م', IQD: 'د.ع', MAD: 'د.م', USD: '$', EUR: '€' }[b.currency] || b.currency;
+    const accent = b.colors?.[0] || '#c9a46a';
+    document.documentElement.style.setProperty('--accent', accent);
+    document.title = isEn ? `Monthly report — ${b.name}` : `التقرير الشهري — ${b.name}`;
+    document.getElementById('wa').href = `https://wa.me/?text=${encodeURIComponent(summary)}`;
+
+    if (!k) {
+      page.innerHTML = `<div class="empty"><h2 style="justify-content:center">لا توجد بيانات بعد</h2><p>أضف أرقام نشاطك من صفحة التحليلات لإنشاء التقرير.</p></div>`;
+    } else {
+      const last6 = metrics.slice(-6).reverse();
+      page.innerHTML = `
+        <header class="r">
+          <div class="logo">${b.logo ? `<img src="${b.logo}" alt="">` : esc(b.name.trim()[0])}</div>
+          <div><h1>${esc(b.name)}</h1><p>التقرير الشهري · ${month(k.period)}${b.industry ? ` · ${esc(t(b.industry))}` : ''}</p></div>
+          <div class="stamp">تاريخ الإصدار<br><b>${new Date(data.generated_at).toLocaleDateString(LOCALE, { day: 'numeric', month: 'long', year: 'numeric' })}</b></div>
+        </header>
+
+        <h2>المؤشرات الرئيسية</h2>
+        <div class="kpis">
+          ${[
+            ['الإيرادات', `${num(k.revenue)} ${cur}`, delta(k.revGrowth)],
+            ['صافي الربح', `${num(k.profit)} ${cur}`, isEn ? `margin ${k.margin}%` : `هامش ${k.margin}%`],
+            ['عملاء جدد', num(k.newCustomers), delta(k.customerGrowth)],
+            ['صحة النشاط', `${k.healthScore}/100`, 'ربحية · نمو · تسويق'],
+            ['متوسط قيمة الطلب', `${num(k.aov, 2)} ${cur}`, isEn ? `${num(k.orders)} orders` : `${num(k.orders)} طلب`],
+            ['تكلفة اكتساب العميل', k.cac == null ? '—' : `${num(k.cac, 2)} ${cur}`, 'الإعلانات ÷ العملاء الجدد'],
+            ['العائد على الإعلانات', k.roas == null ? '—' : `${k.roas}x`, 'المستهدف 4x فأكثر'],
+            ['المتابعون', num(k.followers), k.followerGrowth != null ? delta(k.followerGrowth) : (isEn ? `engagement ${k.engagement}%` : `تفاعل ${k.engagement}%`)],
+          ].map(([l, v, d]) => `<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d}</div></div>`).join('')}
+        </div>
+
+        <h2>${isEn ? `Performance over ${metrics.length} months` : `الأداء خلال ${metrics.length} شهر`}</h2>
+        <div class="charts avoid">
+          <div class="chart"><b>الإيرادات مقابل المصاريف</b>
+            <div class="legend"><span><i style="background:#2a78d6"></i>الإيرادات</span><span><i style="background:#eb6834"></i>المصاريف</span></div>
+            <div class="box"><canvas id="c1"></canvas></div></div>
+          <div class="chart"><b>صافي الربح الشهري</b><div class="legend">&nbsp;</div><div class="box"><canvas id="c2"></canvas></div></div>
+        </div>
+
+        <h2>آخر 6 أشهر</h2>
+        <table class="avoid"><thead><tr><th>الشهر</th><th>الإيرادات</th><th>المصاريف</th><th>صافي الربح</th><th>الطلبات</th><th>عملاء جدد</th><th>الإعلانات</th></tr></thead>
+          <tbody>${last6.map((m) => `<tr><td>${month(m.period)}</td><td>${num(m.revenue)}</td><td>${num(m.expenses)}</td>
+            <td class="${m.revenue - m.expenses >= 0 ? 'up' : 'down'}">${num(m.revenue - m.expenses)}</td><td>${num(m.orders)}</td><td>${num(m.new_customers)}</td><td>${num(m.marketing_spend)}</td></tr>`).join('')}</tbody></table>
+        <p style="font-size:12px;color:var(--ink-3);margin:8px 0 0">${isEn ? `Content activity in the period: ${stats.designs} new designs · ${stats.published} published posts` : `نشاط المحتوى خلال الفترة: ${stats.designs} تصميم جديد · ${stats.published} منشور تم نشره`}</p>
+
+        ${a ? `
+        <h2>التحليل الذكي</h2>
+        <div class="summary avoid">${esc(a.summary)}</div>
+        <div class="swot avoid" style="margin-top:10px">
+          ${[['strengths', 'نقاط القوة', 's1'], ['weaknesses', 'نقاط الضعف', 's2'], ['opportunities', 'الفرص', 's3'], ['threats', 'التهديدات', 's4']]
+            .map(([key, t, c]) => `<div class="${c}"><h3>${t}</h3><ul>${(a[key] || []).map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}
+        </div>
+        <h2>التوصيات</h2>
+        ${(a.recommendations || []).map((r, i) => `<div class="rec avoid"><span class="n">${i + 1}</span><div><b>${esc(r.title)}${r.priority ? ` · أولوية ${esc(r.priority)}` : ''}</b><p>${esc(r.detail)}${r.impact ? ` — <i>${esc(r.impact)}</i>` : ''}</p></div></div>`).join('')}
+        <h2>خطة الـ 30 يوماً</h2>
+        <div class="plan avoid">${(a.plan30 || []).map((w) => `<div><small>${esc(w.week)}</small><b style="display:block;margin:2px 0 6px">${esc(w.focus)}</b><ul>${(w.actions || []).map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>`
+        : '<h2>التحليل الذكي</h2><p style="color:var(--ink-2)">لم يتم إنشاء تحليل ذكي بعد — شغّله من صفحة التحليلات ليظهر هنا.</p>'}
+
+        <footer class="r"><span>${esc(b.name)}${b.city ? ` · ${esc(b.city)}` : ''}</span><span>تم إنشاؤه بواسطة Nashmi Studio</span></footer>`;
+
+      const C = window.Chart;
+      C.defaults.font.family = "'IBM Plex Sans Arabic', sans-serif";
+      C.defaults.color = '#8a7f74';
+      C.defaults.animation = false; // charts must be fully drawn before printing
+      const labels = metrics.map((m) => month(m.period, 'short'));
+      const scales = { x: { grid: { display: false } }, y: { grid: { color: '#efe9df' }, border: { display: false }, ticks: { maxTicksLimit: 5 } } };
+      new C(document.getElementById('c1'), {
+        type: 'line',
+        data: { labels, datasets: [
+          { data: metrics.map((m) => m.revenue), borderColor: '#2a78d6', borderWidth: 2, pointRadius: 0, tension: 0.35 },
+          { data: metrics.map((m) => m.expenses), borderColor: '#eb6834', borderWidth: 2, pointRadius: 0, tension: 0.35 },
+        ] },
+        options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales },
+      });
+      new C(document.getElementById('c2'), {
+        type: 'bar',
+        data: { labels, datasets: [{ data: metrics.map((m) => m.revenue - m.expenses), backgroundColor: '#1baf7a', borderRadius: 4, maxBarThickness: 22 }] },
+        options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales },
+      });
+    }
+
+    window.lucide?.createIcons();
+    document.getElementById('print').onclick = () => window.print();
+    document.getElementById('mail').onclick = async (e) => {
+      const btn = e.currentTarget;
+      btn.disabled = true;
+      const r = await fetch('/api/report/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ whatsapp: false }) });
+      const j = await r.json();
+      alert(r.ok ? t('تم إرسال التقرير بالبريد ✓') : t(j.error));
+      btn.disabled = false;
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nashmi Studio — الدخول</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='30' fill='%23d9a85f'/><text x='32' y='43' font-size='30' text-anchor='middle' font-family='Arial' font-weight='700' fill='%231d1408'>N</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/glass.css">
+  <script src="/vendor/lucide.js" defer></script>
+  <style>
+    .auth { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; padding: 40px clamp(16px, 5vw, 80px); max-width: 1300px; margin: 0 auto; }
+    .auth-pitch h1 { font-size: clamp(32px, 4vw, 52px); line-height: 1.25; margin: 22px 0 14px; letter-spacing: -.5px; }
+    .auth-pitch h1 em { font-style: normal; background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .auth-pitch p { color: var(--ink-2); font-size: 17px; max-width: 520px; }
+    .perks { display: grid; gap: 12px; margin-top: 28px; }
+    .perk { display: flex; gap: 12px; align-items: center; padding: 12px 16px; border-radius: 16px; max-width: 460px; }
+    .auth-card { border-radius: var(--r-lg); padding: 30px; width: 100%; max-width: 500px; justify-self: center; background: var(--sheen), rgba(18, 15, 14, .78); }
+    .tabs { display: grid; grid-template-columns: 1fr 1fr; padding: 5px; border-radius: 999px; background: rgba(255,255,255,.07); margin-bottom: 22px; }
+    .tabs button { height: 40px; border: 0; border-radius: 999px; background: transparent; cursor: pointer; color: var(--ink-2); font-weight: 500; }
+    .tabs button.active { background: #fff; color: #111; }
+    .err { color: var(--critical-ink); font-size: 13.5px; min-height: 20px; margin: 10px 0 0; }
+    .demo { margin-top: 18px; padding: 12px 14px; border-radius: 14px; background: rgba(232,196,138,.1); border: 1px dashed rgba(232,196,138,.4); font-size: 13px; color: var(--ink-2); }
+    @media (max-width: 900px) { .auth { grid-template-columns: 1fr; } .auth-pitch { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="wallpaper"></div>
+  <div style="position:fixed;top:16px;inset-inline-end:16px;z-index:5"><button class="btn sm" id="lang-toggle" data-no-i18n><i data-lucide="languages"></i><span></span></button></div>
+  <main class="auth">
+    <section class="auth-pitch">
+      <a class="brand glass" href="/"><span class="brand-mark">N</span><span>Nashmi Studio<small>استوديو الأعمال الذكي</small></span></a>
+      <h1>إعلانات احترافية<br>و<em>تحليل ذكي</em> لنشاطك<br>في مكان واحد</h1>
+      <p>صمّم بوسترات وإعلانات جاهزة للنشر خلال ثوانٍ، واعرف أين ينمو نشاطك وأين يخسر — بالذكاء الاصطناعي.</p>
+      <div class="perks">
+        <div class="perk glass"><span class="icon-chip"><i data-lucide="wand-sparkles"></i></span><span>تصاميم بهوية علامتك لكل منصات التواصل</span></div>
+        <div class="perk glass"><span class="icon-chip"><i data-lucide="chart-no-axes-combined"></i></span><span>لوحة تحليلات كاملة مع توصيات وخطة 30 يوماً</span></div>
+        <div class="perk glass"><span class="icon-chip"><i data-lucide="pen-line"></i></span><span>كاتب محتوى ونصوص إعلانية بلهجة جمهورك</span></div>
+      </div>
+    </section>
+
+    <section class="auth-card glass">
+      <div class="card tint-gold hidden" id="invite-banner" style="margin-bottom:18px;box-shadow:none;padding:14px 16px">
+        <b id="invite-title"></b><p class="small muted" style="margin:4px 0 0">سجّل حساباً جديداً أو ادخل بحسابك الحالي لقبول الدعوة.</p>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="active" data-tab="login" role="tab">تسجيل الدخول</button>
+        <button data-tab="register" role="tab">حساب جديد</button>
+      </div>
+
+      <form id="login" class="grid" style="gap:14px">
+        <label class="field"><span>البريد الإلكتروني</span><input class="input" type="email" name="email" dir="ltr" autocomplete="email" required></label>
+        <label class="field"><span>كلمة المرور</span><input class="input" type="password" name="password" autocomplete="current-password" required></label>
+        <button class="btn primary" style="height:46px;margin-top:6px">دخول<i data-lucide="arrow-left"></i></button>
+        <p class="err" data-err></p>
+        <div class="demo hidden" id="demo-hint"><b>تجربة سريعة:</b> حساب عميل تجريبي جاهز —
+          <span dir="ltr">demo@nashmi.studio</span> / <span dir="ltr">demo12345</span>
+          <button type="button" class="btn sm" id="fill-demo" style="margin-top:8px">تعبئة البيانات</button></div>
+      </form>
+
+      <form id="register" class="grid hidden" style="gap:12px">
+        <div class="form-grid">
+          <label class="field"><span>اسمك *</span><input class="input" name="name" required autocomplete="name"></label>
+          <label class="field biz-only"><span>اسم النشاط *</span><input class="input" name="businessName" required></label>
+          <label class="field biz-only"><span>المجال</span><select class="select" name="industry" id="industry"></select></label>
+          <label class="field"><span>الهاتف</span><input class="input" name="phone" dir="ltr" autocomplete="tel" placeholder="+962"></label>
+          <label class="field biz-only"><span>الدولة</span><input class="input" name="country" value="الأردن"></label>
+          <label class="field biz-only"><span>المدينة</span><input class="input" name="city" placeholder="عمّان"></label>
+          <label class="field full"><span>البريد الإلكتروني *</span><input class="input" type="email" name="email" dir="ltr" autocomplete="email" required></label>
+          <label class="field full"><span>كلمة المرور * (8 أحرف على الأقل)</span><input class="input" type="password" name="password" minlength="8" autocomplete="new-password" required></label>
+        </div>
+        <button class="btn gold" style="height:46px;margin-top:6px">إنشاء الحساب — 30 نقطة مجاناً</button>
+        <p class="err" data-err></p>
+      </form>
+    </section>
+  </main>
+
+  <script type="module">
+    import { $, $$, applyWallpaper, INDUSTRIES } from '/js/core.js';
+    import { startI18n, setLang, isEn, t } from '/js/i18n.js';
+    startI18n();
+    applyWallpaper();
+    $('#lang-toggle span').textContent = isEn ? 'العربية' : 'English';
+    $('#lang-toggle').onclick = () => setLang(isEn ? 'ar' : 'en');
+    addEventListener('DOMContentLoaded', () => window.lucide?.createIcons());
+    $('#industry').innerHTML = '<option value="">اختر...</option>' + INDUSTRIES.map((i) => `<option>${i}</option>`).join('');
+
+    const show = (tab) => {
+      $$('[data-tab]').forEach((b) => b.classList.toggle('active', b.dataset.tab === tab));
+      $('#login').classList.toggle('hidden', tab !== 'login');
+      $('#register').classList.toggle('hidden', tab !== 'register');
+    };
+    $$('[data-tab]').forEach((b) => (b.onclick = () => show(b.dataset.tab)));
+    if (location.hash === '#register') show('register');
+
+    // Team invite links: /login?invite=TOKEN
+    const invite = new URLSearchParams(location.search).get('invite');
+    if (invite) {
+      fetch(`/api/auth/invite/${encodeURIComponent(invite)}`).then((r) => r.json()).then((inv) => {
+        if (inv.error) { $('#invite-banner').classList.remove('hidden'); $('#invite-title').textContent = inv.error; return; }
+        $('#invite-banner').classList.remove('hidden');
+        $('#invite-title').textContent = `تمت دعوتك للانضمام إلى فريق ${inv.business} (${inv.role === 'viewer' ? 'مشاهد' : 'محرر'})`;
+        $$('[name=email]').forEach((i) => { i.value = inv.email; i.readOnly = true; });
+        $$('.biz-only').forEach((el) => el.classList.add('hidden'));
+        $('[name=businessName]').required = false;
+        show('register');
+      });
+    }
+    fetch('/api/auth/config').then((r) => r.json()).then((c) => $('#demo-hint').classList.toggle('hidden', !c.demo)).catch(() => {});
+
+    $('#fill-demo').onclick = () => {
+      $('#login [name=email]').value = 'demo@nashmi.studio';
+      $('#login [name=password]').value = 'demo12345';
+    };
+
+    async function submit(form, url) {
+      const btn = form.querySelector('button:not([type=button])');
+      const err = form.querySelector('[data-err]');
+      err.textContent = '';
+      btn.classList.add('loading');
+      try {
+        const body = { ...Object.fromEntries(new FormData(form)), invite };
+        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'حدث خطأ');
+        location.href = data.role === 'admin' ? '/app#/admin' : '/app#/overview';
+      } catch (e) {
+        err.textContent = e.message;
+      } finally {
+        btn.classList.remove('loading');
+      }
+    }
+    $('#login').onsubmit = (e) => { e.preventDefault(); submit(e.target, '/api/auth/login'); };
+    $('#register').onsubmit = (e) => { e.preventDefault(); submit(e.target, '/api/auth/register'); };
+  </script>
+</body>
+</html>

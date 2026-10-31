@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nashmi Studio — لوحة التحكم</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23f3d9a8'/><stop offset='1' stop-color='%23b9823f'/></linearGradient></defs><circle cx='32' cy='32' r='30' fill='url(%23g)'/><text x='32' y='43' font-size='30' text-anchor='middle' font-family='Arial' font-weight='700' fill='%231d1408'>N</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/glass.css">
+  <link rel="stylesheet" href="/css/studio.css">
+  <script src="/vendor/lucide.js" defer></script>
+  <script src="/vendor/chart.js" defer></script>
+  <script src="/vendor/marked.js" defer></script>
+  <script src="/vendor/purify.js" defer></script>
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <div class="wallpaper"></div>
+
+  <header class="topbar">
+    <a class="brand glass" href="#/">
+      <span class="brand-mark">N</span>
+      <span><span data-app-name>Nashmi Studio</span><small id="biz-name">&nbsp;</small></span>
+      <i data-lucide="chevrons-up-down" class="brand-caret"></i>
+    </a>
+    <nav class="pillnav glass" id="nav"></nav>
+    <div class="top-actions">
+      <button class="btn icon glass bell hidden" id="bell" aria-label="التنبيهات"><i data-lucide="bell"></i><span class="count hidden" id="bell-count"></span></button>
+      <span class="badge warn hidden" id="viewer-badge"><i data-lucide="eye"></i>مشاهدة فقط</span>
+      <div class="credit-pill glass" id="credits" title="نقاط الذكاء الاصطناعي المتبقية">
+        <span class="ai-dot" id="ai-dot"></span>
+        <i data-lucide="sparkles"></i><span class="lbl">النقاط</span><b class="num" id="credit-count">—</b>
+      </div>
+      <button class="avatar" id="avatar" aria-label="الحساب"></button>
+    </div>
+  </header>
+
+  <aside class="dock glass" id="dock"></aside>
+
+  <main class="view" id="view">
+    <div class="grid kpis" style="margin-top:40px">
+      <div class="card skeleton" style="height:140px"></div><div class="card skeleton" style="height:140px"></div>
+      <div class="card skeleton" style="height:140px"></div><div class="card skeleton" style="height:140px"></div>
+    </div>
+  </main>
+
+  <div id="toasts" aria-live="polite"></div>
+  <div id="modal-root"></div>
+</body>
+</html>
